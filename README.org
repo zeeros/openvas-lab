@@ -1,3 +1,58 @@
 #+title: OpenVAS Lab - Network Security
 
-Notes and code of the OpenVAS lab for the Network Security class.
+Notes for the OpenVAS lab for the Network Security class.
+
+* Introduction
+** What is OpenVAS?
+
+[[./openvas-gvm.jpg]]
+
+OpenVAS (Open Vulnerability Assessment Scanner) is [fn:1]
+- A full-featured scan engine that executes a continuously updated and extended feed of Network Vulnerability Tests (NVTs).
+- Part of GVM (Greenbone Vulnerability Management)
+
+OpenVAS can use two daily updated feeds
+- GCF :: Greenbone Community Feed, available with the free version
+- GSF :: Greenbone Security Feed, available with the paid version. Includes advanced NVTs to target enterprise environments.
+
+** Virtual Machine
+
+We are going to use [fn:2]
+- Oracle VM VirtualBox 6.1.16 (download [[https://www.virtualbox.org/wiki/Downloads][here]])
+- GSM TRIAL 20.08.8 (download [[https://www.greenbone.net/en/testnow/#toggle-id-4-closed][here]])
+
+*** GSM setup
+
+1. Import the GSM TRIAL image from VirtualBox
+2. The Greenbone OS is loaded. To access the Greenbone Administration panel log in with username ~admin~ and password ~admin~.
+3. At the first log in, a First Setup Wizard is visualized, select "Yes" to continue.
+4. It is asked whether a web user should be created. This is required to use the web interface, select "Yes" and input account name ~admin~ and password ~admin~. Select OK, a message informs the user that the web administrator has been created, and again select OK to close the message.
+5. Since we have no valid GSF subscription key, the appliance only uses the public Greenbone Community Feed (GCF) and not the Greenbone Security Feed (GSF). Skip the the subscription key dialog.
+6. A status check is performed, and the manager is ready to be used
+7. Logout from the the administration panel. In the welcome screen, take note of the IP address used by the web interface (e.g. 10.0.2.15) and shut down the VM.
+
+*** Web interface setup
+
+1. In VirtualBox, go to Settings->Network, set Attached to: NAT
+2. Go to Advanced->Port Forwarding and create a new rule
+   - Protocol :: TCP
+   - Host IP :: 127.0.0.1
+   - Host Port :: 8443, or any unused port over 1024
+   - Guest IP :: The web interface address (e.g. 10.0.2.15)
+   - Guest Port :: 443
+3. From the host machine, open https://127.0.0.1:8443 to access the web interface and login with the previously set credentials (username ~admin~, password ~admin~)
+
+* Exercises
+** TODO Exercise 1
+** TODO Exercise 2
+** TODO Exercise 3
+* References
+
+- [[https://resources.infosecinstitute.com/topic/a-brief-introduction-to-the-openvas-vulnerability-scanner/][A Brief Introduction to the OpenVAS Vulnerability Scanner]]
+- [[https://securitytrails.com/blog/openvas-vulnerability-scanner][OpenVAS/GVM: An Open Source Vulnerability Scanning and Management System]]
+
+* Footnotes
+
+[fn:1] https://community.greenbone.net/t/about-gvm-10-architecture/1231
+
+[fn:2] https://resources.infosecinstitute.com/topic/a-brief-introduction-to-the-openvas-vulnerability-scanner/
