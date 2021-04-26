@@ -3,7 +3,6 @@
 Notes for the OpenVAS lab for the Network Security class.
 
 * Introduction
-** What is OpenVAS?
 
 [[./openvas-gvm.jpg]]
 
@@ -15,32 +14,35 @@ OpenVAS can use two daily updated feeds
 - GCF :: Greenbone Community Feed, available with the free version
 - GSF :: Greenbone Security Feed, available with the paid version. Includes advanced NVTs to target enterprise environments.
 
-** Virtual Machine
+* Virtual machines setup
 
-We are going to use [fn:2]
+We are going to use
 - Oracle VM VirtualBox 6.1.16 (download [[https://www.virtualbox.org/wiki/Downloads][here]])
 - GSM TRIAL 20.08.8 (download [[https://www.greenbone.net/en/testnow/#toggle-id-4-closed][here]])
+- Metasploitable 2 (download [[https://information.rapid7.com/download-metasploitable-2017.html][here]])
 
-*** GSM setup
+Before proceding with the VMs creation, be sure to have a ~Host-only Adapter~ already set: we don't want to expose our VMs to the web, especially the vulnerable one. To setup a ~Host-only Adapter~
+- Go to ~File > Host Network Manager...~
+- Click on ~New~, take note of the name of the adapter (e.g. ~voboxnet0~)
 
-1. Import the GSM TRIAL image from VirtualBox
+** OpenVAS VM setup [fn:2]
+
+1. Import the GSM TRIAL image from VirtualBox and select it go to Settings > Network. On the tab "Adapter 1" set "Attached to:" to "Host-only Adapter" and set the adapter (e.g. ~voboxnet0~). Start the virtual machine.
 2. The Greenbone OS is loaded. To access the Greenbone Administration panel log in with username ~admin~ and password ~admin~.
 3. At the first log in, a First Setup Wizard is visualized, select "Yes" to continue.
 4. It is asked whether a web user should be created. This is required to use the web interface, select "Yes" and input account name ~admin~ and password ~admin~. Select OK, a message informs the user that the web administrator has been created, and again select OK to close the message.
 5. Since we have no valid GSF subscription key, the appliance only uses the public Greenbone Community Feed (GCF) and not the Greenbone Security Feed (GSF). Skip the the subscription key dialog.
-6. A status check is performed, and the manager is ready to be used
-7. Logout from the the administration panel. In the welcome screen, take note of the IP address used by the web interface (e.g. 10.0.2.15) and shut down the VM.
+6. A status check is performed, and the manager is ready to be used.
+7. Logout from the the administration panel. In the welcome screen, take note of the IP address used by the web interface (e.g. ~192.1.68.56.102~) and shut down the VM.
+8. From the host machine, open a browser and connect to the noted IP address (e.g. https://192.168.56.102). After accepting the self-signed certificate, access the web interface and login with the previously set credentials (username ~admin~, password ~admin~).
 
-*** Web interface setup
+** Metasploitable2 VM setup
 
-1. In VirtualBox, go to Settings->Network, set Attached to: NAT
-2. Go to Advanced->Port Forwarding and create a new rule
-   - Protocol :: TCP
-   - Host IP :: 127.0.0.1
-   - Host Port :: 8443, or any unused port over 1024
-   - Guest IP :: The web interface address (e.g. 10.0.2.15)
-   - Guest Port :: 443
-3. From the host machine, open https://127.0.0.1:8443 to access the web interface and login with the previously set credentials (username ~admin~, password ~admin~)
+Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. [fn:3] [fn:4]
+
+To know the IP address of the VM
+- Login with credentials ~msfadmin:msfadmin~
+- Identify the IP address assigned to the VM with ~ifconfig~
 
 * Exercises
 ** TODO Exercise 1
@@ -56,3 +58,7 @@ We are going to use [fn:2]
 [fn:1] https://community.greenbone.net/t/about-gvm-10-architecture/1231
 
 [fn:2] https://resources.infosecinstitute.com/topic/a-brief-introduction-to-the-openvas-vulnerability-scanner/
+
+[fn:3] https://medium.com/hacker-toolbelt/metasploitable-2-i-lab-setup-8cd4472d7958
+
+[fn:4] https://docs.rapid7.com/metasploit/metasploitable-2/
