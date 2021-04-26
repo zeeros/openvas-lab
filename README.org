@@ -40,9 +40,9 @@ Before proceding with the VMs creation, be sure to have a ~Host-only Adapter~ al
 
 Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. [fn:3] [fn:4]
 
-To know the IP address of the VM
-- Login with credentials ~msfadmin:msfadmin~
-- Identify the IP address assigned to the VM with ~ifconfig~
+1. Import the Metasploitable2 VM
+2. Login use the credentials ~msfadmin:msfadmin~ and with ~ifconfig~ retrieve the IP address assigned to the VM
+3. From the host machine, open a browser and connect to the noted IP address (e.g. https://192.168.56.101). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
 
 * Exercises
 ** TODO Exercise 1
