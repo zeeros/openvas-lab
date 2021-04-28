@@ -14,7 +14,7 @@ OpenVAS can use two daily updated feeds
 - GCF :: Greenbone Community Feed, available with the free version
 - GSF :: Greenbone Security Feed, available with the paid version. Includes advanced NVTs to target enterprise environments.
 
-* Virtual machines setup
+* Setting up the lab
 
 We are going to use
 - Oracle VM VirtualBox 6.1.16 (download [[https://www.virtualbox.org/wiki/Downloads][here]])
@@ -24,6 +24,8 @@ We are going to use
 Before proceding with the VMs creation, be sure to have a ~Host-only Adapter~ already set: we don't want to expose our VMs to the web, especially the vulnerable one. To setup a ~Host-only Adapter~
 - Go to ~File > Host Network Manager...~
 - Click on ~New~, take note of the name of the adapter (e.g. ~voboxnet0~)
+
+The final result will be a ~.ova~ file containing two VMs: one for GSM, the other for Metasploitable 2
 
 ** OpenVAS VM setup [fn:2]
 
@@ -36,22 +38,31 @@ Before proceding with the VMs creation, be sure to have a ~Host-only Adapter~ al
 7. Logout from the the administration panel. In the welcome screen, take note of the IP address used by the web interface (e.g. ~192.1.68.56.102~) and shut down the VM.
 8. From the host machine, open a browser and connect to the noted IP address (e.g. https://192.168.56.102). After accepting the self-signed certificate, access the web interface and login with the previously set credentials (username ~admin~, password ~admin~).
 
-** Metasploitable2 VM setup
+** Metasploitable2 VM setup [fn:3] [fn:4]
 
-Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. [fn:3] [fn:4]
+Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. The metasploitable ISO is VMWare format.
 
-1. Import the Metasploitable2 VM
-2. Login use the credentials ~msfadmin:msfadmin~ and with ~ifconfig~ retrieve the IP address assigned to the VM
+1. Unzip the file and create a new VM: choose Linux->Ubuntu (64bit), give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk *.vmdk.
+2. Login using the credentials ~msfadmin:msfadmin~ and with ~ifconfig~ retrieve the IP address assigned to the VM
 3. From the host machine, open a browser and connect to the noted IP address (e.g. https://192.168.56.101). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
 
 * Exercises
+
+With the VMs already setup, we can access to the following environments
+- Greenbone Administration panel :: ~admin:admin~
+- Greenbone Web panel :: ~admin:admin~
+- Metasploitable2 panel :: ~msfadmin:msfadmin~
+
 ** TODO Exercise 1
 ** TODO Exercise 2
 ** TODO Exercise 3
+
 * References
 
 - [[https://resources.infosecinstitute.com/topic/a-brief-introduction-to-the-openvas-vulnerability-scanner/][A Brief Introduction to the OpenVAS Vulnerability Scanner]]
 - [[https://securitytrails.com/blog/openvas-vulnerability-scanner][OpenVAS/GVM: An Open Source Vulnerability Scanning and Management System]]
+- [[http://knight.segfaults.net/EEE473Labs/Lab%206%20Part%202%20-%20Vulnerability%20Scanning%20with%20OpenVAS.htm][Exercise on vulnerability scan and accessment]]
+- [[http://webpages.eng.wayne.edu/~fy8421/16sp-csc5991/labs/lab3-instruction.pdf][Lab example with OpenVAS]]
 
 * Footnotes
 
