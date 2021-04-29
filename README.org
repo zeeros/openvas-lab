@@ -42,7 +42,7 @@ The final result will be a ~.ova~ file containing two VMs: one for GSM, the othe
 
 Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. The metasploitable ISO is VMWare format.
 
-1. Unzip the file and create a new VM: choose Linux->Ubuntu (64bit), give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk *.vmdk.
+1. Unzip the file and create a new VM: choose Linux->Ubuntu (64bit), give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk *.vmdk. Select the new VM and go to Settings > Network. On the tab "Adapter 1" set "Attached to:" to "Host-only Adapter" and set the adapter (e.g. ~voboxnet0~). Start the virtual machine.
 2. Login using the credentials ~msfadmin:msfadmin~ and with ~ifconfig~ retrieve the IP address assigned to the VM
 3. From the host machine, open a browser and connect to the noted IP address (e.g. https://192.168.56.101). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
 
