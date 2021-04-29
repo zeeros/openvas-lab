@@ -35,7 +35,7 @@ The final result will be a ~.ova~ file containing two VMs: one for GSM, the othe
 4. It is asked whether a web user should be created. This is required to use the web interface, select "Yes" and input account name ~admin~ and password ~admin~. Select OK, a message informs the user that the web administrator has been created, and again select OK to close the message.
 5. Since we have no valid GSF subscription key, the appliance only uses the public Greenbone Community Feed (GCF) and not the Greenbone Security Feed (GSF). Skip the the subscription key dialog.
 6. A status check is performed, and the manager is ready to be used.
-7. Logout from the the administration panel. In the welcome screen, take note of the IP address used by the web interface (e.g. ~192.1.68.56.102~) and shut down the VM.
+7. Logout from the the administration panel. In the welcome screen, take note of the IP address used by the web interface (e.g. ~192.168.56.102~) and shut down the VM.
 8. From the host machine, open a browser and connect to the noted IP address (e.g. https://192.168.56.102). After accepting the self-signed certificate, access the web interface and login with the previously set credentials (username ~admin~, password ~admin~).
 
 ** Metasploitable2 VM setup [fn:3] [fn:4]
