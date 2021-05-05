@@ -1,25 +1,25 @@
 
 # Table of Contents
 
-1.  [Requirements](#orgc59d6e3)
-2.  [Network setup](#orgdce01c4)
-3.  [Virtual machines setup](#orgf172824)
-    1.  [OpenVAS VM setup ](#org534d427)
-    2.  [Metasploitable2 VM setup ](#org794b517)
-    3.  [Exporting to `.ova`](#orgdd03ec9)
-4.  [Laboratory](#orgf67b4d4)
-    1.  [First steps](#orgfcd2601)
-    2.  [What is OpenVAS?](#orge1976af)
-    3.  [Network vulnerability feed](#org5f16849)
-    4.  [Scans](#org8050c30)
-        1.  [Scan configuration](#org0ebdf63)
-    5.  [Scan results](#org5f6fee9)
-5.  [References](#org41e9c6d)
+1.  [Requirements](#org6268e59)
+2.  [Network setup](#orgf516cd3)
+3.  [Virtual machines setup](#org148f9c1)
+    1.  [OpenVAS VM setup ](#org776bb04)
+    2.  [Metasploitable2 VM setup ](#org2cddd66)
+    3.  [Exporting to `.ova`](#orgc052b2b)
+4.  [Laboratory](#orgcdb629f)
+    1.  [First steps](#orge39c78d)
+    2.  [What is OpenVAS?](#org1761609)
+    3.  [Network vulnerability feed](#org1348ea6)
+    4.  [Scans](#orga2aa1ca)
+        1.  [Scan configuration](#org435eb7b)
+    5.  [Scan results](#orgd4e2b4d)
+5.  [References](#org9db715b)
 
 Notes for the OpenVAS lab for the Network Security class.
 
 
-<a id="orgc59d6e3"></a>
+<a id="org6268e59"></a>
 
 # Requirements
 
@@ -30,7 +30,7 @@ We are going to use
 -   Metasploitable 2 (download [here](https://information.rapid7.com/download-metasploitable-2017.html))
 
 
-<a id="orgdce01c4"></a>
+<a id="orgf516cd3"></a>
 
 # Network setup
 
@@ -46,16 +46,16 @@ Before using the VMs be sure to have them connected through a host-only network:
 To connect a VM select it and go to `Settings > Network`. On the tab `Adapter 1` set `Attached to: Host-only Adapter` and set the right adapter (e.g. `voboxnet0`). Start the virtual machine.
 
 
-<a id="orgf172824"></a>
+<a id="org148f9c1"></a>
 
 # Virtual machines setup
 
 
-<a id="org534d427"></a>
+<a id="org776bb04"></a>
 
 ## OpenVAS VM setup <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 
-1.  Open VirtualBox and import the GSM TRIAL image, be sure to [connect it to the network adapter](#orgdce01c4).
+1.  Open VirtualBox and import the GSM TRIAL image, be sure to [connect it to the network adapter](#orgf516cd3).
 2.  Start the virtual machine: the Greenbone OS is loaded. Access the Greenbone Administration panel with `admin:admin`.
 3.  The first log in starts the `First Setup Wizard`, select `Yes` to continue.
 4.  We are asked to create a web user (required to access the web interface), select `Yes` and input account name `admin` and password `admin`. Select `OK`, a message informs the user that the web administrator has been created, and again select `OK` to close the message.
@@ -65,18 +65,18 @@ To connect a VM select it and go to `Settings > Network`. On the tab `Adapter 1`
 8.  From the host machine, open a browser and connect to the IP address of the machine (e.g. <https://192.168.56.102>). After accepting the self-signed certificate, access the web interface and login with the previously set credentials.
 
 
-<a id="org794b517"></a>
+<a id="org2cddd66"></a>
 
 ## Metasploitable2 VM setup <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> <sup>, </sup><sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>
 
 Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. The metasploitable ISO is VMWare format.
 
-1.  Unzip the file and create a new VM: choose `Linux->Ubuntu (64bit)`, give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk `*.vmdk`, remember to [connect the VM to the network adapter](#orgdce01c4). Start the virtual machine.
+1.  Unzip the file and create a new VM: choose `Linux->Ubuntu (64bit)`, give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk `*.vmdk`, remember to [connect the VM to the network adapter](#orgf516cd3). Start the virtual machine.
 2.  Login using the credentials `msfadmin:msfadmin` and with `ifconfig` retrieve the IP address assigned to the VM
 3.  From the host machine, open a browser and connect to the noted IP address (e.g. <https://192.168.56.101>). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
 
 
-<a id="orgdd03ec9"></a>
+<a id="orgc052b2b"></a>
 
 ## Exporting to `.ova`
 
@@ -87,7 +87,7 @@ We can now create an `.ova` file containing two VMs: one for GSM, the other for 
 3.  Set the names of the two VMs (e.g. `Metasploitable2` and `OpenVAS`) and click on `Export`.
 
 
-<a id="orgf67b4d4"></a>
+<a id="orgcdb629f"></a>
 
 # Laboratory
 
@@ -98,10 +98,10 @@ We have the following environment setup
     -   **Greenbone Web panel:** `admin:admin`
 -   Metasploitable2 virtual machine
     -   **Metasploitable2 panel:** `msfadmin:msfadmin`
--   The two VMs are connected to a host-only network (see more in the section [Network setup](#orgdce01c4))
+-   The two VMs are connected to a host-only network (see more in the section [Network setup](#orgf516cd3))
 
 
-<a id="orgfcd2601"></a>
+<a id="orge39c78d"></a>
 
 ## First steps
 
@@ -111,7 +111,7 @@ From now on we are going to interact only through the Greenbone Web panel: conne
 
 ![img](./img/dashboard.jpg)
 
-The first thing we can do is scheduling a network scan to find out who is connected to the network. From the top menu, go to `Scans > Tasks` and move the cursor to the magic wand icon (🪄), select `Advanced Task Wizard`.
+The first thing we can do is scheduling a network scan to find out who is connected to the network. From the top menu, go to `Scans > Tasks` and move the cursor to the magic wand icon, select `Advanced Task Wizard`.
 
 ![img](./img/advanced_wizard.jpg)
 
@@ -132,7 +132,7 @@ We repeat the same process to create another task, this time with the following 
 The two scans will take few minutes to complete, meanwhile we can have an overview of the tool.
 
 
-<a id="orge1976af"></a>
+<a id="org1761609"></a>
 
 ## What is OpenVAS?
 
@@ -148,7 +148,7 @@ The GVM architecture is described by the scheme below
 ![img](./img/gvm_architecture.jpg)
 
 
-<a id="org5f16849"></a>
+<a id="org1348ea6"></a>
 
 ## Network vulnerability feed
 
@@ -160,7 +160,7 @@ OpenVAS can use two daily updated feeds of Network Vulnerability Tests (NVTs)
 At the time of writing, GCF can count on more than 60.000 NVTs. This list can be accessed through the Greenbone web panel in the menu `SecInfo > NVTs`.
 
 
-<a id="org8050c30"></a>
+<a id="orga2aa1ca"></a>
 
 ## Scans
 
@@ -173,7 +173,7 @@ Scans allow to execute a series of NVTs for a given target. There are some defau
 -   **Full and fast:** For many environments this is the best option to start with. This scan configuration is based on the information gathered in the previous port scan and uses almost all VTs (excluding VTs that can damage the target system when used). VTs are optimized in the best possible way to keep the potential false negative rate especially low.
 
 
-<a id="org0ebdf63"></a>
+<a id="org435eb7b"></a>
 
 ### TODO Scan configuration
 
@@ -195,14 +195,14 @@ For example we can choose to specifically search for
 -   [OWASP Mutillidae II](https://github.com/webpwnized/mutillidae) vulnerabilities/challenges
 
 
-<a id="org5f6fee9"></a>
+<a id="orgd4e2b4d"></a>
 
 ## TODO Scan results
 
 Here we showcase the menu pages reports, results, vulnerabilities + download an read the resulting report PDF.
 
 
-<a id="org41e9c6d"></a>
+<a id="org9db715b"></a>
 
 # References
 
