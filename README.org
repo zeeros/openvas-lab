@@ -59,6 +59,7 @@ With the VMs already setup, we can access to the following environments
 
 * References
 
+- [[https://docs.greenbone.net/GSM-Manual/gos-20.08/en/][Greenbone Security Manager with Greenbone OS 20.08 - User Manual]]
 - [[https://resources.infosecinstitute.com/topic/a-brief-introduction-to-the-openvas-vulnerability-scanner/][A Brief Introduction to the OpenVAS Vulnerability Scanner]]
 - [[https://securitytrails.com/blog/openvas-vulnerability-scanner][OpenVAS/GVM: An Open Source Vulnerability Scanning and Management System]]
 - [[http://knight.segfaults.net/EEE473Labs/Lab%206%20Part%202%20-%20Vulnerability%20Scanning%20with%20OpenVAS.htm][Exercise on vulnerability scan and accessment]]
