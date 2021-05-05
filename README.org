@@ -2,7 +2,14 @@
 
 Notes for the OpenVAS lab for the Network Security class.
 
-* Introduction
+* Requirements
+
+We are going to use
+- Oracle VM VirtualBox 6.1.16 (download [[https://www.virtualbox.org/wiki/Downloads][here]])
+- GSM TRIAL 20.08.8 (download [[https://www.greenbone.net/en/testnow/#toggle-id-4-closed][here]])
+- Metasploitable 2 (download [[https://information.rapid7.com/download-metasploitable-2017.html][here]])
+
+* What is OpenVAS?
 
 [[./openvas-gvm.jpg]]
 
@@ -14,19 +21,17 @@ OpenVAS can use two daily updated feeds
 - GCF :: Greenbone Community Feed, available with the free version
 - GSF :: Greenbone Security Feed, available with the paid version. Includes advanced NVTs to target enterprise environments.
 
-* Setting up the lab
+* Network setup
 
-We are going to use
-- Oracle VM VirtualBox 6.1.16 (download [[https://www.virtualbox.org/wiki/Downloads][here]])
-- GSM TRIAL 20.08.8 (download [[https://www.greenbone.net/en/testnow/#toggle-id-4-closed][here]])
-- Metasploitable 2 (download [[https://information.rapid7.com/download-metasploitable-2017.html][here]])
+[[./host_network_manager.jpg]]
 
-Before proceding with the VMs creation, be sure to have a ~Host-only Adapter~ already set: we don't want to expose our VMs to the web, especially the vulnerable one. To setup a ~Host-only Adapter~
+Before using the VMs be sure to have them connected through a host-only network: we don't want to expose our VMs to the network, especially the vulnerable target. To setup a ~Host-only Adapter~
 - Go to ~File > Host Network Manager...~
-- Click on ~New~, take note of the name of the adapter (e.g. ~voboxnet0~)
+- Click on ~Create~, take note of the name of the adapter (e.g. ~voboxnet0~)
+- Click on ~Properties > DHCP Server > Enable Server~
+- Click ~Apply~ and close the window
 
-The final result will be a ~.ova~ file containing two VMs: one for GSM, the other for Metasploitable 2
-
+* Virtual machines setup
 ** OpenVAS VM setup [fn:2]
 
 1. Import the GSM TRIAL image from VirtualBox and select it go to Settings > Network. On the tab "Adapter 1" set "Attached to:" to "Host-only Adapter" and set the adapter (e.g. ~voboxnet0~). Start the virtual machine.
@@ -46,16 +51,25 @@ Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine tha
 2. Login using the credentials ~msfadmin:msfadmin~ and with ~ifconfig~ retrieve the IP address assigned to the VM
 3. From the host machine, open a browser and connect to the noted IP address (e.g. https://192.168.56.101). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
 
+** Exporting to .ova
+
+We can now create an ~.ova~ file containing two VMs: one for GSM, the other for Metasploitable 2.
+
+1. In VirtualBox, go to File > Export Appliance and select the VMs just created and click on Next
+2. Select from the dropwdown menu and choose the location of your ~.ova~ file
+3. Set the "MAC Address Policy" at "Include all network adapter MAC adresses" and click on Next
+4. Set the names of the two VMs (e.g. Metasploitable2 and OpenVAS) and click on "Export"
+
 * Exercises
 
-With the VMs already setup, we can access to the following environments
-- Greenbone Administration panel :: ~admin:admin~
-- Greenbone Web panel :: ~admin:admin~
-- Metasploitable2 panel :: ~msfadmin:msfadmin~
-
-** TODO Exercise 1
-** TODO Exercise 2
-** TODO Exercise 3
+We have the following environment setup
+- OpenVAS virtual machine
+  - Greenbone Administration panel :: ~admin:admin~
+  - Greenbone Web panel :: ~admin:admin~
+- Metasploitable2 virtual machine
+  - Metasploitable2 panel :: ~msfadmin:msfadmin~
+- The two VMs are connected to a host-only network (see more in the section [[* Network setup][Network setup]])
+** TODO Exercises
 
 * References
 
