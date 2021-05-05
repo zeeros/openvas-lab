@@ -68,7 +68,7 @@ From now on we are going to interact only through the Greenbone Web panel: conne
 [[./img/dashboard.jpg]]
 
 
-The first thing we can do is scheduling a network scan to find out who is connected to the network. From the top menu, go to ~Scans > Tasks~ and move the cursor to the magic wand icon (🪄), select ~Advanced Task Wizard~.
+The first thing we can do is scheduling a network scan to find out who is connected to the network. From the top menu, go to ~Scans > Tasks~ and move the cursor to the magic wand icon, select ~Advanced Task Wizard~.
 
 [[./img/advanced_wizard.jpg]]
 
