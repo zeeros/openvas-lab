@@ -9,21 +9,9 @@ We are going to use
 - GSM TRIAL 20.08.8 (download [[https://www.greenbone.net/en/testnow/#toggle-id-4-closed][here]])
 - Metasploitable 2 (download [[https://information.rapid7.com/download-metasploitable-2017.html][here]])
 
-* What is OpenVAS?
-
-[[./openvas-gvm.jpg]]
-
-OpenVAS (Open Vulnerability Assessment Scanner) is [fn:1]
-- A full-featured scan engine that executes a continuously updated and extended feed of Network Vulnerability Tests (NVTs).
-- Part of GVM (Greenbone Vulnerability Management)
-
-OpenVAS can use two daily updated feeds
-- GCF :: Greenbone Community Feed, available with the free version
-- GSF :: Greenbone Security Feed, available with the paid version. Includes advanced NVTs to target enterprise environments.
-
 * Network setup
 
-[[./host_network_manager.jpg]]
+[[./img/host_network_manager.jpg]]
 
 Before using the VMs be sure to have them connected through a host-only network: we don't want to expose our VMs to the network, especially the vulnerable target. To setup a ~Host-only Adapter~
 - Go to ~File > Host Network Manager...~
@@ -61,7 +49,7 @@ We can now create an ~.ova~ file containing two VMs: one for GSM, the other for 
 2. Select ~Format: Open Virtualization Format~, set the path to your ~.ova~ file in ~File:~. Click on ~Next~.
 3. Set the names of the two VMs (e.g. ~Metasploitable2~ and ~OpenVAS~) and click on ~Export~.
 
-* Exercises
+* Laboratory
 
 We have the following environment setup
 - OpenVAS virtual machine
@@ -70,7 +58,84 @@ We have the following environment setup
 - Metasploitable2 virtual machine
   - Metasploitable2 panel :: ~msfadmin:msfadmin~
 - The two VMs are connected to a host-only network (see more in the section [[* Network setup][Network setup]])
-** TODO Exercises
+
+** First steps
+
+From now on we are going to interact only through the Greenbone Web panel: connect to it through a web browser and login with the credentials ~admin:admin~.
+
+[[./img/greenbone_weblogin.jpg]]
+
+[[./img/dashboard.jpg]]
+
+
+The first thing we can do is scheduling a network scan to find out who is connected to the network. From the top menu, go to ~Scans > Tasks~ and move the cursor to the magic wand icon (🪄), select ~Advanced Task Wizard~.
+
+[[./img/advanced_wizard.jpg]]
+
+Input the following settings and the click on ~Create~
+- Task name ::  ~Network discovery~
+- Scan Config :: ~Discovery~
+- Target Host(s) :: The IP address of the host-only subnet created in VirtualBox (e.g. ~192.168.56.0/24~)
+- Start Time :: ~Start immediately~
+
+We repeat the same process to create another task, this time with the following settings
+- Task name ::  ~Target discovery~
+- Scan Config :: ~Full and fast~
+- Target Host(s) :: The IP address of the Metasploitable2 VM (e.g. ~192.168.56.4~)
+- Start Time :: ~Start immediately~
+
+The two scans will take few minutes to complete, meanwhile we can have an overview of the tool.
+
+** What is OpenVAS?
+
+[[./img/openvas-gvm.jpg]]
+
+OpenVAS (Open Vulnerability Assessment Scanner) is [fn:1]
+- A full-featured scan engine that executes a continuously updated and extended feed of Network Vulnerability Tests (NVTs).
+- Part of GVM (Greenbone Vulnerability Management)
+
+The GVM architecture is described by the scheme below
+
+[[./img/gvm_architecture.jpg]]
+
+** Network vulnerability feed
+
+OpenVAS can use two daily updated feeds of Network Vulnerability Tests (NVTs)
+- GCF :: Greenbone Community Feed, available with the free version
+- GSF :: Greenbone Security Feed, available with the commercial version. Includes advanced NVTs to target enterprise environments. If no valid GSF subscription key is stored on the appliance, the appliance only uses the public Greenbone Community Feed (GCF) and not the GSF.
+
+At the time of writing, GCF can count on more than 60.000 NVTs. This list can be accessed through the Greenbone web panel in the menu ~SecInfo > NVTs~.
+
+** Scans
+
+Scans allow to execute a series of NVTs for a given target. There are some default scan configurations already available
+- Base :: Basic configuration template with a minimum set of NVTs required for a scan.
+- Discovery :: Network discovery scan for open ports, used hardware, firewalls, used services, installed software and certificates.
+- Host Discovery :: Used port scanner is Ping Host, which detects whether a host is alive.
+- System Discovery :: This scan configuration is used to detect target systems including installed operating systems and used hardware.
+- Full and fast :: For many environments this is the best option to start with. This scan configuration is based on the information gathered in the previous port scan and uses almost all VTs (excluding VTs that can damage the target system when used). VTs are optimized in the best possible way to keep the potential false negative rate especially low.
+
+*** TODO Scan configuration
+
+Here we should build an example scan configuration that targets a specific type of vulnerability.
+For example we can choose to specifically search for
+- Weak passwords
+  + System-level accounts
+    - ~mdfadmin:msfadmin~
+    - ~user:user~
+    - ~postgres:postgres~
+    - ~sys:batman~
+    - ~klog:123456789~
+    - ~service:service~
+  + Access to services
+    - PostgresSQL :: ~postgres:postgres~
+    - MySQL :: ~root:~
+    - VNC :: ~:password~
+- [[https://github.com/webpwnized/mutillidae][OWASP Mutillidae II]] vulnerabilities/challenges
+
+** TODO Scan results
+
+Here we showcase the menu pages reports, results, vulnerabilities + download an read the resulting report PDF.
 
 * References
 
