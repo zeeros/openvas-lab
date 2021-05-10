@@ -106,7 +106,7 @@ OpenVAS can use two daily updated feeds of Network Vulnerability Tests (NVTs)
 
 At the time of writing, GCF can count on more than 60.000 NVTs. This list can be accessed through the Greenbone web panel in the menu ~SecInfo > NVTs~.
 
-** Scans
+** Default scan configurations
 
 Scans allow to execute a series of NVTs for a given target. There are some default scan configurations already available
 - Base :: Basic configuration template with a minimum set of NVTs required for a scan.
@@ -115,23 +115,20 @@ Scans allow to execute a series of NVTs for a given target. There are some defau
 - System Discovery :: This scan configuration is used to detect target systems including installed operating systems and used hardware.
 - Full and fast :: For many environments this is the best option to start with. This scan configuration is based on the information gathered in the previous port scan and uses almost all VTs (excluding VTs that can damage the target system when used). VTs are optimized in the best possible way to keep the potential false negative rate especially low.
 
-*** TODO Scan configuration
+** Custom scan configurations [fn:5]
 
-Here we should build an example scan configuration that targets a specific type of vulnerability.
-For example we can choose to specifically search for
-- Weak passwords
-  + System-level accounts
-    - ~mdfadmin:msfadmin~
-    - ~user:user~
-    - ~postgres:postgres~
-    - ~sys:batman~
-    - ~klog:123456789~
-    - ~service:service~
-  + Access to services
-    - PostgresSQL :: ~postgres:postgres~
-    - MySQL :: ~root:~
-    - VNC :: ~:password~
-- [[https://github.com/webpwnized/mutillidae][OWASP Mutillidae II]] vulnerabilities/challenges
+While default configurations are good for most of the cases, we might want to look for a more specific target and/or vulnerabilities and reduce the time required for a scan: this can be done by creating a custom scan configuration that works with a specific set of NVTs.
+
+*** TODO Databases scan configuration
+
+We want to create a scan configuration that focuses on databases vulnerabilities, to do so
+1. Go to ~Configuration > Scan Configs~ and click on ~New Scan Config~
+2. Set the name of the scan to ~Databases~. We want start from an empty scan config and then enable few NVTs, so set ~Base~ to ~Empty, static and fast~ and save the configuration.
+3. On the column ~Actions~, click on edit icon. Among the NVT families, find the one named ~Databases~ and check the ~Select all NVTs~ column.
+
+The new scan configuration is ready to use for a new scan.
+
+*** TODO Exercises
 
 ** TODO Scan results
 
@@ -154,3 +151,5 @@ Here we showcase the menu pages reports, results, vulnerabilities + download an 
 [fn:3] https://medium.com/hacker-toolbelt/metasploitable-2-i-lab-setup-8cd4472d7958
 
 [fn:4] https://docs.rapid7.com/metasploit/metasploitable-2/
+
+[fn:5] https://www.hackingtutorials.org/scanning-tutorials/openvas-9-part-4-custom-scan-configurations/
