@@ -132,9 +132,48 @@ We want to create a scan configuration that focuses on databases vulnerabilities
 
 The new scan configuration is ready to be used for a new scan. Setup more custom configurations and run them on the target VM to discover more vulnerabilities (hint: web servers an and SMTP servers might be a good start).
 
-** TODO Scan results
+** Scan results
 
-Here we showcase the menu pages reports, results, vulnerabilities + download an read the resulting report PDF.
+Click on the date of a report to display its details and open the following registers
+- Information :: General information about the corresponding scan.
+- Results :: List of all results in this report.
+- Hosts :: Scanned hosts (host names + IP addresses). The detected operating systems, the number of found vulnerabilies for each severity and the highest severity found by the scan are displayed.
+- Ports ::  Scanned ports with port name, number of hosts and highest severity found by the scan.
+- Applications :: Scanned applications with CPE (Common Platform Enumeration) of the application, number of hosts, number of occurrences of results that detected this CPE and highest severity found by the scan.
+- Operating Systems :: Scanned operating systems with system name, host name, number of scanned hosts and highest severity found by the scan.
+- CVEs :: CVEs (Common Vulnerability Enumerations) found with the scan.
+- Closed CVEs :: CVEs of originally detected vulnerabilities which were already confirmed as solved during the scan.
+- TLS Certificates :: TLS certificates found with the scan.
+- Error Messages :: Error messages that occurred during the scan.
+- User Tags :: Assigned tags.
+
+From here, the register ~Results~ contains a list of all vulnerabilities detected by the GSM: for every result the following information is displayed.
+- Vulnerability :: Name of the found vulnerability, details are shown by clicking on it
+- Solution type :: Possible solution found for the vulnerability
+- Severity :: Measured with the CVSS (Common Vulnerability Scoring System), current CVSS score version is 3.1.
+- QoD :: Quality of Detection, shows the reliability of the detection of a vulnerability.
+- Host :: The IP address and the name of the host of the target host.
+- Location :: Port number and protocol type used to find the vulnerability on the host.
+- Created :: Date and time of the report creation.
+
+*** CVSS [fn:7]
+
+The Common Vulnerability Scoring System (CVSS) is a published standard used by organizations worldwide
+- Provides a way to capture the principal characteristics of a vulnerability and produce a numerical score reflecting its severity
+- Numerical score can be used to get a qualitative measure (such as low, medium, high, and critical)
+- Developed by the CVSS Special Interest Group (CVSS-SIG) of the Forum of Incident Response and Security Teams (FIRST)
+
+*** Report export
+
+[[./img/report_content_composer.jpg]]
+
+- Select ~Scans > Reports~ in the menu bar.
+- Click on the date of a report to open the details page of the report.
+- Click the download icon, select from the opened dialog the desired format.
+
+The PDF file includes, a ordered list of vulnerabilities (from highest to lowest severity): below an example of how a vulnerability is displayed using this format.
+
+[[./img/vulnerability_pdf.jpg]]
 
 * References
 
@@ -146,14 +185,16 @@ Here we showcase the menu pages reports, results, vulnerabilities + download an 
 
 * Footnotes
 
-[fn:1] https://community.greenbone.net/t/about-gvm-10-architecture/1231
+[fn:7] https://docs.greenbone.net/GSM-Manual/gos-5/en/managing-secinfo.html#cvss
 
-[fn:2] https://resources.infosecinstitute.com/topic/a-brief-introduction-to-the-openvas-vulnerability-scanner/
-
-[fn:3] https://medium.com/hacker-toolbelt/metasploitable-2-i-lab-setup-8cd4472d7958
-
-[fn:4] https://docs.rapid7.com/metasploit/metasploitable-2/
+[fn:6] https://community.greenbone.net/t/hint-self-created-scan-configs-copy-of-empty-scan-config-showing-no-results/331
 
 [fn:5] https://www.hackingtutorials.org/scanning-tutorials/openvas-9-part-4-custom-scan-configurations/
 
-[fn:6] https://community.greenbone.net/t/hint-self-created-scan-configs-copy-of-empty-scan-config-showing-no-results/331
+[fn:4] https://docs.rapid7.com/metasploit/metasploitable-2/
+
+[fn:3] https://medium.com/hacker-toolbelt/metasploitable-2-i-lab-setup-8cd4472d7958
+
+[fn:2] https://resources.infosecinstitute.com/topic/a-brief-introduction-to-the-openvas-vulnerability-scanner/
+
+[fn:1] https://community.greenbone.net/t/about-gvm-10-architecture/1231
