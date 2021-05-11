@@ -15,7 +15,7 @@ We are going to use
 
 Before using the VMs be sure to have them connected through a host-only network: we don't want to expose our VMs to the network, especially the vulnerable target. To setup a ~Host-only Adapter~
 - Go to ~File > Host Network Manager...~
-- Click on ~Create~, take note of the name of the adapter (e.g. ~voboxnet0~)
+- Click on ~Create~, take note of the name of the adapter (e.g. ~vboxnet0~)
 - Click on ~Properties > DHCP Server > Enable Server~
 - Click ~Apply~ and close the window
 
@@ -61,6 +61,10 @@ We have the following environment setup
 
 ** First steps
 
+First of all, we need to check what is the actual IP address assigned by the DHCP server, in our case
+- Metasploitable2 (e.g. ~192.168.56.4~) :: Login and use ~ifconfig~ to find out the IP address
+- OpenVAS (eg ~192.168.56.101~) :: The IP address is prompted in the console when the machine is started
+
 From now on we are going to interact only through the Greenbone Web panel: connect to it through a web browser and login with the credentials ~admin:admin~.
 
 [[./img/greenbone_weblogin.jpg]]
@@ -79,7 +83,7 @@ Input the following settings and the click on ~Create~
 - Start Time :: ~Start immediately~
 
 We repeat the same process to create another task, this time with the following settings
-- Task name ::  ~Target discovery~
+- Task name ::  ~Target scan~
 - Scan Config :: ~Full and fast~
 - Target Host(s) :: The IP address of the Metasploitable2 VM (e.g. ~192.168.56.4~)
 - Start Time :: ~Start immediately~
