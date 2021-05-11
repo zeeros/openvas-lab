@@ -123,16 +123,14 @@ Scans allow to execute a series of NVTs for a given target. There are some defau
 
 While default configurations are good for most of the cases, we might want to look for a more specific target and/or vulnerabilities and reduce the time required for a scan: this can be done by creating a custom scan configuration that works with a specific set of NVTs.
 
-*** TODO Databases scan configuration
+*** Exercise
 
 We want to create a scan configuration that focuses on databases vulnerabilities, to do so
 1. Go to ~Configuration > Scan Configs~ and click on ~New Scan Config~
-2. Set the name of the scan to ~Databases~. We want start from an empty scan config and then enable few NVTs, so set ~Base~ to ~Empty, static and fast~ and save the configuration.
-3. On the column ~Actions~, click on edit icon. Among the NVT families, find the one named ~Databases~ and check the ~Select all NVTs~ column.
+2. Set the name of the scan to ~Web application abuses~. We want start from an empty scan config and then enable few NVTs, so set ~Base~ to ~Empty, static and fast~ and save the configuration.
+3. On the column ~Actions~, click on edit icon. Among the NVT families, find the one named ~Web application abuses~ and check the ~Select all NVTs~ column.
 
-The new scan configuration is ready to use for a new scan.
-
-*** TODO Exercises
+The new scan configuration is ready to be used for a new scan. Setup more custom configurations and run them on the target VM to discover more vulnerabilities (hint: web servers an and SMTP servers might be a good start).
 
 ** TODO Scan results
 
