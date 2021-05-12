@@ -258,26 +258,48 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 
 <a id="org3253ffc"></a>
 ## Defintions
-`Vulnerabilities` 
-`Threat` 
-`Risk` 
-`Impacts` 
+`Vulnerabilities`<br>
+`Threat`<br>
+`Risk`<br>
+`Impacts` <br>
+- C, I, A .
+
+## Compliances
+- SecRAM <br>
+- NIST 800-30<br> 
+
+
+
+## Vulnerability Assessments
+`Definition` <br>
+`Categories of vulnerabilities`<br>
+`Methodology`<br>
+`Tools`<br>
+_ Scoring Systems
+_ Scanners (OpenVAS)
+
+## Exploit Assessments
+`Definition` <br>
+`Benefits` <br>
+`Methodology` <br>
 
 ## Risk Assessments
-`Definition` 
-`Benefits` 
-`Methodology` 
+`Definition`<br>
+`Benefits` <br>
+`Methodology`<br>
+- NIST 800-30
+- SecRAM
 
-## Impacts
-`C,I,A` 
+
+
 
 ## Qualitative Assessments
-`Methodology`
-`Benefits / Drawbacks`
+`Methodology`<br>
+`Benefits / Drawbacks`<br>
 
 ## Quantitative Assessments
-`Benefits/Drawbacks`
-`Tools`
+`Benefits/Drawbacks`<br>
+`Tools`<br>
 - Scoring Systems : CVSS operation
 - Scanners
 # References
