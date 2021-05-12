@@ -258,18 +258,28 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 
 <a id="org3253ffc"></a>
 ## Defintions
-- `Vulnerabilities`
--`Threat`
--`Risk`
--`Impacts`
+`Vulnerabilities` 
+`Threat` 
+`Risk` 
+`Impacts` 
 
 ## Risk Assessments
-`Definition`
-`Benefits`
-`Methodology`
+`Definition` 
+`Benefits` 
+`Methodology` 
 
 ## Impacts
-`C,I,A`
+`C,I,A` 
+
+## Qualitative Assessments
+`Methodology`
+`Benefits / Drawbacks`
+
+## Quantitative Assessments
+`Benefits/Drawbacks`
+`Tools`
+- Scoring Systems : CVSS operation
+- Scanners
 # References
 
 -   [Greenbone Security Manager with Greenbone OS 20.08 - User Manual](https://docs.greenbone.net/GSM-Manual/gos-20.08/en/)
