@@ -273,6 +273,7 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 ## Vulnerability Assessments
 `Definition` <br>
 `Categories of vulnerabilities`<br>
+``
 `Methodology`<br>
 `Tools`<br>
 - Scoring Systems
