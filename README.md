@@ -293,15 +293,13 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 
 
 
-## Qualitative Assessments
-`Methodology`<br>
+## Qualitative vs Quantitative Assessments
 `Benefits / Drawbacks`<br>
-
-## Quantitative Assessments
-`Benefits/Drawbacks`<br>
 `Tools`<br>
 - Scoring Systems : CVSS operation
 - Scanners
+
+
 # References
 
 -   [Greenbone Security Manager with Greenbone OS 20.08 - User Manual](https://docs.greenbone.net/GSM-Manual/gos-20.08/en/)
