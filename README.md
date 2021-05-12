@@ -262,11 +262,11 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 `Threat`<br>
 `Risk`<br>
 `Impacts` <br>
-- C, I, A .
+- C, I, A 
 
 ## Compliances
 - SecRAM <br>
-- NIST 800-30<br> 
+- NIST 800-30 <br> 
 
 
 
@@ -275,8 +275,8 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 `Categories of vulnerabilities`<br>
 `Methodology`<br>
 `Tools`<br>
-_ Scoring Systems
-_ Scanners (OpenVAS)
+- Scoring Systems
+- Scanners (OpenVAS)
 
 ## Exploit Assessments
 `Definition` <br>
