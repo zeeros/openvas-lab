@@ -269,7 +269,7 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 `Methodology`
 
 ## Impacts
-'C,I,A'
+`C,I,A`
 # References
 
 -   [Greenbone Security Manager with Greenbone OS 20.08 - User Manual](https://docs.greenbone.net/GSM-Manual/gos-20.08/en/)
