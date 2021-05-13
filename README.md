@@ -1,28 +1,30 @@
 
 # Table of Contents
 
-1.  [Requirements](#org1d14e9f)
-2.  [Network setup](#org4c97add)
-3.  [Virtual machines setup](#orgd041307)
-    1.  [OpenVAS VM setup ](#org7619eff)
-    2.  [Metasploitable2 VM setup ](#orgd817a66)
-    3.  [Exporting to `.ova`](#org27bdbca)
-4.  [Laboratory](#org591abdd)
-    1.  [First steps](#orgf80a8b3)
-    2.  [What is OpenVAS?](#org44fa802)
-    3.  [Network vulnerability feed](#org8aec101)
-    4.  [Default scan configurations](#org0985f57)
-    5.  [Custom scan configurations ](#org8384ee7)
-        1.  [Exercise](#org2e59d10)
-    6.  [Scan results](#org1fe628d)
-        1.  [CVSS ](#org2105f3f)
-        2.  [Report export](#orga7eb417)
-5.  [References](#org0cc67b0)
+1.  [Requirements](#orgcb09f16)
+2.  [Virtual machines setup](#org69b85d4)
+    1.  [OpenVAS VM setup ](#orga2e15cd)
+    2.  [Metasploitable2 VM setup ](#org33b2924)
+    3.  [Exporting to `.ova`](#org2a5df75)
+3.  [Network setup](#orge9668bb)
+4.  [Laboratory](#orgd5ab0c1)
+    1.  [Network topology](#org0a9a0d6)
+    2.  [First steps](#org3ce830c)
+    3.  [Vulnerability assessment](#org966d740)
+    4.  [What is OpenVAS?](#org26d0d0a)
+        1.  [Network vulnerability feed](#org21af4b3)
+    5.  [Default scan configurations](#org820bbf7)
+    6.  [Custom scan configurations ](#org5176c9d)
+        1.  [Exercise](#orgb99eff9)
+    7.  [Scan results](#orgf63277a)
+        1.  [CVSS ](#orgeefe1a7)
+        2.  [Report export](#org127ff5e)
+5.  [References](#org2507b4e)
 
 Notes for the OpenVAS lab for the Network Security class.
 
 
-<a id="org1d14e9f"></a>
+<a id="orgcb09f16"></a>
 
 # Requirements
 
@@ -33,7 +35,48 @@ We are going to use
 -   Metasploitable 2 (download [here](https://information.rapid7.com/download-metasploitable-2017.html))
 
 
-<a id="org4c97add"></a>
+<a id="org69b85d4"></a>
+
+# Virtual machines setup
+
+
+<a id="orga2e15cd"></a>
+
+## OpenVAS VM setup <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+
+1.  Open VirtualBox and import the GSM TRIAL image, be sure to [connect it to the network adapter](#orge9668bb).
+2.  Start the virtual machine: the Greenbone OS is loaded. Access the Greenbone Administration panel with `admin:admin`.
+3.  The first log in starts the `First Setup Wizard`, select `Yes` to continue.
+4.  We are asked to create a web user (required to access the web interface), select `Yes` and input account name `admin` and password `admin`. Select `OK`, a message informs the user that the web administrator has been created, and again select `OK` to close the message.
+5.  Since we have no valid GSF subscription key, the application only uses the public Greenbone Community Feed (GCF) and not the Greenbone Security Feed (GSF). Skip the the subscription key dialog.
+6.  A status check is performed, and the manager is ready to be used.
+7.  Logout from the the administration panel. In the welcome screen, take note of the IP address used by the web interface and shut down the VM.
+8.  From the host machine, open a browser and connect to the IP address of the machine (e.g. <https://192.168.56.102>). After accepting the self-signed certificate, access the web interface and login with the previously set credentials.
+
+
+<a id="org33b2924"></a>
+
+## Metasploitable2 VM setup <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> <sup>, </sup><sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>
+
+Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. The metasploitable ISO is VMWare format.
+
+1.  Unzip the file and create a new VM: choose `Linux->Ubuntu (64bit)`, give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk `*.vmdk`, remember to [connect the VM to the network adapter](#orge9668bb). Start the virtual machine.
+2.  Login using the credentials `msfadmin:msfadmin` and with `ifconfig` retrieve the IP address assigned to the VM
+3.  From the host machine, open a browser and connect to the noted IP address (e.g. <https://192.168.56.101>). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
+
+
+<a id="org2a5df75"></a>
+
+## Exporting to `.ova`
+
+We can now create an `.ova` file containing two VMs: one for GSM, the other for Metasploitable 2.
+
+1.  In VirtualBox, go to `File > Export Appliance` and select the VMs just created, click `Next`
+2.  Select `Format: Open Virtualization Format`, set the path to your `.ova` file in `File:`. Click on `Next`.
+3.  Set the names of the two VMs (e.g. `Metasploitable2` and `OpenVAS`) and click on `Export`.
+
+
+<a id="orge9668bb"></a>
 
 # Network setup
 
@@ -49,50 +92,21 @@ Before using the VMs be sure to have them connected through a host-only network:
 To connect a VM select it and go to `Settings > Network`. On the tab `Adapter 1` set `Attached to: Host-only Adapter` and set the right adapter (e.g. `voboxnet0`). Start the virtual machine.
 
 
-<a id="orgd041307"></a>
-
-# Virtual machines setup
-
-
-<a id="org7619eff"></a>
-
-## OpenVAS VM setup <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
-
-1.  Open VirtualBox and import the GSM TRIAL image, be sure to [connect it to the network adapter](#org4c97add).
-2.  Start the virtual machine: the Greenbone OS is loaded. Access the Greenbone Administration panel with `admin:admin`.
-3.  The first log in starts the `First Setup Wizard`, select `Yes` to continue.
-4.  We are asked to create a web user (required to access the web interface), select `Yes` and input account name `admin` and password `admin`. Select `OK`, a message informs the user that the web administrator has been created, and again select `OK` to close the message.
-5.  Since we have no valid GSF subscription key, the application only uses the public Greenbone Community Feed (GCF) and not the Greenbone Security Feed (GSF). Skip the the subscription key dialog.
-6.  A status check is performed, and the manager is ready to be used.
-7.  Logout from the the administration panel. In the welcome screen, take note of the IP address used by the web interface and shut down the VM.
-8.  From the host machine, open a browser and connect to the IP address of the machine (e.g. <https://192.168.56.102>). After accepting the self-signed certificate, access the web interface and login with the previously set credentials.
-
-
-<a id="orgd817a66"></a>
-
-## Metasploitable2 VM setup <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> <sup>, </sup><sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>
-
-Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. The metasploitable ISO is VMWare format.
-
-1.  Unzip the file and create a new VM: choose `Linux->Ubuntu (64bit)`, give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk `*.vmdk`, remember to [connect the VM to the network adapter](#org4c97add). Start the virtual machine.
-2.  Login using the credentials `msfadmin:msfadmin` and with `ifconfig` retrieve the IP address assigned to the VM
-3.  From the host machine, open a browser and connect to the noted IP address (e.g. <https://192.168.56.101>). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
-
-
-<a id="org27bdbca"></a>
-
-## Exporting to `.ova`
-
-We can now create an `.ova` file containing two VMs: one for GSM, the other for Metasploitable 2.
-
-1.  In VirtualBox, go to `File > Export Appliance` and select the VMs just created, click `Next`
-2.  Select `Format: Open Virtualization Format`, set the path to your `.ova` file in `File:`. Click on `Next`.
-3.  Set the names of the two VMs (e.g. `Metasploitable2` and `OpenVAS`) and click on `Export`.
-
-
-<a id="org591abdd"></a>
+<a id="orgd5ab0c1"></a>
 
 # Laboratory
+
+
+<a id="org0a9a0d6"></a>
+
+## Network topology
+
+![img](./img/topology.jpg)
+
+
+<a id="org3ce830c"></a>
+
+## First steps
 
 We have the following environment setup
 
@@ -101,17 +115,12 @@ We have the following environment setup
     -   **Greenbone Web panel:** `admin:admin`
 -   Metasploitable2 virtual machine
     -   **Metasploitable2 panel:** `msfadmin:msfadmin`
--   The two VMs are connected to a host-only network (see more in the section [Network setup](#org4c97add))
-
-
-<a id="orgf80a8b3"></a>
-
-## First steps
+-   The two VMs are connected to a host-only network (see more in the section [Network setup](#orge9668bb))
 
 First of all, we need to check what is the actual IP address assigned by the DHCP server, in our case
 
--   **Metasploitable2 (e.g. `192.168.56.4`):** Login and use `ifconfig` to find out the IP address
--   **OpenVAS (eg `192.168.56.101`):** The IP address is prompted in the console when the machine is started
+-   **OpenVAS (eg `192.168.56.102`):** The IP address is prompted in the console when the machine is started
+-   **Metasploitable2 (e.g. `192.168.56.103`):** Login and use `ifconfig` to find out the IP address
 
 From now on we are going to interact only through the Greenbone Web panel: connect to it through a web browser and login with the credentials `admin:admin`.
 
@@ -137,10 +146,15 @@ We repeat the same process to create another task, this time with the following 
 -   **Target Host(s):** The IP address of the Metasploitable2 VM (e.g. `192.168.56.4`)
 -   **Start Time:** `Start immediately`
 
-The two scans will take few minutes to complete, meanwhile we can have an overview of the tool.
+The two scans will take few minutes to complete.
 
 
-<a id="org44fa802"></a>
+<a id="org966d740"></a>
+
+## TODO Vulnerability assessment
+
+
+<a id="org26d0d0a"></a>
 
 ## What is OpenVAS?
 
@@ -156,9 +170,9 @@ The GVM architecture is described by the scheme below
 ![img](./img/gvm_architecture.jpg)
 
 
-<a id="org8aec101"></a>
+<a id="org21af4b3"></a>
 
-## Network vulnerability feed
+### Network vulnerability feed
 
 OpenVAS can use two daily updated feeds of Network Vulnerability Tests (NVTs)
 
@@ -168,7 +182,7 @@ OpenVAS can use two daily updated feeds of Network Vulnerability Tests (NVTs)
 At the time of writing, GCF can count on more than 60.000 NVTs. This list can be accessed through the Greenbone web panel in the menu `SecInfo > NVTs`.
 
 
-<a id="org0985f57"></a>
+<a id="org820bbf7"></a>
 
 ## Default scan configurations
 
@@ -181,14 +195,14 @@ Scans allow to execute a series of NVTs for a given target. There are some defau
 -   **Full and fast:** For many environments this is the best option to start with. This scan configuration is based on the information gathered in the previous port scan and uses almost all VTs (excluding VTs that can damage the target system when used). VTs are optimized in the best possible way to keep the potential false negative rate especially low.
 
 
-<a id="org8384ee7"></a>
+<a id="org5176c9d"></a>
 
 ## Custom scan configurations <sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup> <sup>, </sup><sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>
 
 While default configurations are good for most of the cases, we might want to look for a more specific target and/or vulnerabilities and reduce the time required for a scan: this can be done by creating a custom scan configuration that works with a specific set of NVTs.
 
 
-<a id="org2e59d10"></a>
+<a id="orgb99eff9"></a>
 
 ### Exercise
 
@@ -201,7 +215,7 @@ We want to create a scan configuration that focuses on databases vulnerabilities
 The new scan configuration is ready to be used for a new scan. Setup more custom configurations and run them on the target VM to discover more vulnerabilities (hint: web servers an and SMTP servers might be a good start).
 
 
-<a id="org1fe628d"></a>
+<a id="orgf63277a"></a>
 
 ## Scan results
 
@@ -230,7 +244,7 @@ From here, the register `Results` contains a list of all vulnerabilities detecte
 -   **Created:** Date and time of the report creation.
 
 
-<a id="org2105f3f"></a>
+<a id="orgeefe1a7"></a>
 
 ### CVSS <sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup>
 
@@ -241,7 +255,7 @@ The Common Vulnerability Scoring System (CVSS) is a published standard used by o
 -   Developed by the CVSS Special Interest Group (CVSS-SIG) of the Forum of Incident Response and Security Teams (FIRST)
 
 
-<a id="orga7eb417"></a>
+<a id="org127ff5e"></a>
 
 ### Report export
 
@@ -256,7 +270,7 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 ![img](./img/vulnerability_pdf.jpg)
 
 
-<a id="org0cc67b0"></a>
+<a id="org2507b4e"></a>
 
 # References
 
