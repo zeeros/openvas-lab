@@ -93,7 +93,7 @@ We repeat the same process to create another task, this time with the following 
 
 The two scans will take few minutes to complete.
 
-** TODO Vulnerability assessment [fn:9]
+** IN-PROGRESS Vulnerability assessment [fn:9]
 
 - No business wants to expose itself to *unnecessary risks* (or be the headline story for the latest cyber attack)
 - From [[https://www.servicenow.com/lpayr/ponemon-vulnerability-survey.html][Ponemon Institute survey]], in 2019
