@@ -93,7 +93,7 @@ We repeat the same process to create another task, this time with the following 
 
 The two scans will take few minutes to complete.
 
-** IN-PROGRESS Vulnerability assessment [fn:9]
+** Vulnerability assessment [fn:9]
 
 - No business wants to expose itself to *unnecessary risks* (or be the headline story for the latest cyber attack)
 - From [[https://www.servicenow.com/lpayr/ponemon-vulnerability-survey.html][Ponemon Institute survey]], in 2019
@@ -102,19 +102,19 @@ The two scans will take few minutes to complete.
   - 52% of the organizations say they are at a disadvantage in responding to vulnerabilities because they use *manual processes*
 - One way to mitigate risks is by performing *routine* network vulnerability assessments
 
+*** What?
+
+- Network vulnerability assessment :: Process of _identifying_ security vulnerabilities in systems, _quantifying_ and _analyzing_ them, and _remediating_ those vulnerabilities based on predefined risks
+- Assessments :: Essential part of a holistic security program, cited by many industry standards and compliance regulations
+- Security experts :: Can
+  - Conduct *vulnerability analysis* of the network scans to _prioritize_ threats identified
+  - Create an *action plan* with steps to _remediate_ vulnerabilities (e.g. maintain up to date patches)
+
 *** Why?
 
 - System hardening :: Identify possible vectors of attack and close them down (e.g. close down unnecessary ports/services)
 - Compliance :: Becoming compliant to regulations (HIPAA, PCI DSS, GDPR, ISO 27001, SOX, FISMA, GLBA, and many others) is impossible without an assessment
 - Maintain strong security :: Routine vulnerability assessments allow identification and mitigation of attacks
-
-*** What?
-
-- Network vulnerability assessment :: Process of _identifying_ security vulnerabilities in systems, _quantifying_ and _analyzing_ them, and _remediating_ those vulnerabilities based on predefined risks
-- Assessments ::  Essential part of a holistic security program, cited by many industry standards and compliance regulations
-- Security experts :: Can
-  - Conduct *vulnerability analysis* of the network scans to _prioritize_ threats identified
-  - Create an *action plan* with steps to _remediate_ vulnerabilities (e.g. maintain up to date patches)
 
 *** When?
 
