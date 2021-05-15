@@ -125,6 +125,8 @@ The two scans will take few minutes to complete.
 
 *** How?
 
+From [[https://purplesec.us/perform-successful-network-vulnerability-assessment/#WhatIs][purplesec.us​]]
+
 [[./img/va_steps.jpg]]
 
 ** What is OpenVAS?

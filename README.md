@@ -1,34 +1,34 @@
 
 # Table of Contents
 
-1.  [Requirements](#org6a25bf8)
-2.  [Virtual machines setup](#org2aba84d)
-    1.  [OpenVAS VM setup ](#org2cabd0b)
-    2.  [Metasploitable2 VM setup ](#orgfa34905)
-    3.  [Exporting to `.ova`](#org24abe20)
-3.  [Network setup](#orga52aa33)
-4.  [Laboratory](#org419a46c)
-    1.  [Network topology](#org43ecf99)
-    2.  [First steps](#org5f4ca23)
-    3.  [Vulnerability assessment ](#org16f185a)
-        1.  [Why?](#orgdb28a1a)
-        2.  [What?](#org34718a0)
-        3.  [When?](#orge7d0b7a)
-        4.  [How?](#org3e4fe9a)
-    4.  [What is OpenVAS?](#org9f25175)
-        1.  [Network vulnerability feed](#org1e664d5)
-    5.  [Default scan configurations](#org0e48bdf)
-    6.  [Custom scan configurations ](#org7d93774)
-        1.  [Exercise](#orgd9cd809)
-    7.  [Scan results](#org409fd16)
-        1.  [CVSS ](#org6159eef)
-        2.  [Report export](#org764d155)
-5.  [References](#orga787f4e)
+1.  [Requirements](#org1e30272)
+2.  [Virtual machines setup](#org724db26)
+    1.  [OpenVAS VM setup ](#org31c60a8)
+    2.  [Metasploitable2 VM setup ](#org41574fb)
+    3.  [Exporting to `.ova`](#org166883e)
+3.  [Network setup](#org25dd605)
+4.  [Laboratory](#orgfd0ca28)
+    1.  [Network topology](#org8ec72a3)
+    2.  [First steps](#org6f7328b)
+    3.  [Vulnerability assessment ](#org7f4fc94)
+        1.  [Why?](#orgf5e9bc2)
+        2.  [What?](#orgace8713)
+        3.  [When?](#org9d50738)
+        4.  [How?](#orgc4718d9)
+    4.  [What is OpenVAS?](#org073f567)
+        1.  [Network vulnerability feed](#org68f01aa)
+    5.  [Default scan configurations](#org5f61643)
+    6.  [Custom scan configurations ](#org6b97e49)
+        1.  [Exercise](#orga59cf25)
+    7.  [Scan results](#org062749c)
+        1.  [CVSS ](#org0bd6b11)
+        2.  [Report export](#org9fe813f)
+5.  [References](#org791867e)
 
 Notes for the OpenVAS lab for the Network Security class.
 
 
-<a id="org6a25bf8"></a>
+<a id="org1e30272"></a>
 
 # Requirements
 
@@ -39,16 +39,16 @@ We are going to use
 -   Metasploitable 2 (download [here](https://information.rapid7.com/download-metasploitable-2017.html))
 
 
-<a id="org2aba84d"></a>
+<a id="org724db26"></a>
 
 # Virtual machines setup
 
 
-<a id="org2cabd0b"></a>
+<a id="org31c60a8"></a>
 
 ## OpenVAS VM setup <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 
-1.  Open VirtualBox and import the GSM TRIAL image, be sure to [connect it to the network adapter](#orga52aa33).
+1.  Open VirtualBox and import the GSM TRIAL image, be sure to [connect it to the network adapter](#org25dd605).
 2.  Start the virtual machine: the Greenbone OS is loaded. Access the Greenbone Administration panel with `admin:admin`.
 3.  The first log in starts the `First Setup Wizard`, select `Yes` to continue.
 4.  We are asked to create a web user (required to access the web interface), select `Yes` and input account name `admin` and password `admin`. Select `OK`, a message informs the user that the web administrator has been created, and again select `OK` to close the message.
@@ -58,18 +58,18 @@ We are going to use
 8.  From the host machine, open a browser and connect to the IP address of the machine (e.g. <https://192.168.56.102>). After accepting the self-signed certificate, access the web interface and login with the previously set credentials.
 
 
-<a id="orgfa34905"></a>
+<a id="org41574fb"></a>
 
 ## Metasploitable2 VM setup <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> <sup>, </sup><sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>
 
 Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. The metasploitable ISO is VMWare format.
 
-1.  Unzip the file and create a new VM: choose `Linux->Ubuntu (64bit)`, give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk `*.vmdk`, remember to [connect the VM to the network adapter](#orga52aa33). Start the virtual machine.
+1.  Unzip the file and create a new VM: choose `Linux->Ubuntu (64bit)`, give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk `*.vmdk`, remember to [connect the VM to the network adapter](#org25dd605). Start the virtual machine.
 2.  Login using the credentials `msfadmin:msfadmin` and with `ifconfig` retrieve the IP address assigned to the VM
 3.  From the host machine, open a browser and connect to the noted IP address (e.g. <https://192.168.56.101>). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
 
 
-<a id="org24abe20"></a>
+<a id="org166883e"></a>
 
 ## Exporting to `.ova`
 
@@ -80,7 +80,7 @@ We can now create an `.ova` file containing two VMs: one for GSM, the other for 
 3.  Set the names of the two VMs (e.g. `Metasploitable2` and `OpenVAS`) and click on `Export`.
 
 
-<a id="orga52aa33"></a>
+<a id="org25dd605"></a>
 
 # Network setup
 
@@ -96,19 +96,19 @@ Before using the VMs be sure to have them connected through a host-only network:
 To connect a VM select it and go to `Settings > Network`. On the tab `Adapter 1` set `Attached to: Host-only Adapter` and set the right adapter (e.g. `voboxnet0`). Start the virtual machine.
 
 
-<a id="org419a46c"></a>
+<a id="orgfd0ca28"></a>
 
 # Laboratory
 
 
-<a id="org43ecf99"></a>
+<a id="org8ec72a3"></a>
 
 ## Network topology
 
 ![img](./img/topology.jpg)
 
 
-<a id="org5f4ca23"></a>
+<a id="org6f7328b"></a>
 
 ## First steps
 
@@ -119,7 +119,7 @@ We have the following environment setup
     -   **Greenbone Web panel:** `admin:admin`
 -   Metasploitable2 virtual machine
     -   **Metasploitable2 panel:** `msfadmin:msfadmin`
--   The two VMs are connected to a host-only network (see more in the section [Network setup](#orga52aa33))
+-   The two VMs are connected to a host-only network (see more in the section [Network setup](#org25dd605))
 
 First of all, we need to check what is the actual IP address assigned by the DHCP server, in our case
 
@@ -153,7 +153,7 @@ We repeat the same process to create another task, this time with the following 
 The two scans will take few minutes to complete.
 
 
-<a id="org16f185a"></a>
+<a id="org7f4fc94"></a>
 
 ## IN-PROGRESS Vulnerability assessment <sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>
 
@@ -165,7 +165,7 @@ The two scans will take few minutes to complete.
 -   One way to mitigate risks is by performing **routine** network vulnerability assessments
 
 
-<a id="orgdb28a1a"></a>
+<a id="orgf5e9bc2"></a>
 
 ### Why?
 
@@ -174,7 +174,7 @@ The two scans will take few minutes to complete.
 -   **Maintain strong security:** Routine vulnerability assessments allow identification and mitigation of attacks
 
 
-<a id="org34718a0"></a>
+<a id="orgace8713"></a>
 
 ### What?
 
@@ -185,7 +185,7 @@ The two scans will take few minutes to complete.
     -   Create an **action plan** with steps to <span class="underline">remediate</span> vulnerabilities (e.g. maintain up to date patches)
 
 
-<a id="orge7d0b7a"></a>
+<a id="org9d50738"></a>
 
 ### When?
 
@@ -195,14 +195,16 @@ The two scans will take few minutes to complete.
     -   Goals of the assessment
 
 
-<a id="org3e4fe9a"></a>
+<a id="orgc4718d9"></a>
 
 ### How?
+
+From [purplesec.us​](https://purplesec.us/perform-successful-network-vulnerability-assessment/#WhatIs)
 
 ![img](./img/va_steps.jpg)
 
 
-<a id="org9f25175"></a>
+<a id="org073f567"></a>
 
 ## What is OpenVAS?
 
@@ -218,7 +220,7 @@ The GVM architecture is described by the scheme below
 ![img](./img/gvm_architecture.jpg)
 
 
-<a id="org1e664d5"></a>
+<a id="org68f01aa"></a>
 
 ### Network vulnerability feed
 
@@ -230,7 +232,7 @@ OpenVAS can use two daily updated feeds of Network Vulnerability Tests (NVTs)
 At the time of writing, GCF can count on more than 60.000 NVTs. This list can be accessed through the Greenbone web panel in the menu `SecInfo > NVTs`.
 
 
-<a id="org0e48bdf"></a>
+<a id="org5f61643"></a>
 
 ## Default scan configurations
 
@@ -243,14 +245,14 @@ Scans allow to execute a series of NVTs for a given target. There are some defau
 -   **Full and fast:** For many environments this is the best option to start with. This scan configuration is based on the information gathered in the previous port scan and uses almost all VTs (excluding VTs that can damage the target system when used). VTs are optimized in the best possible way to keep the potential false negative rate especially low.
 
 
-<a id="org7d93774"></a>
+<a id="org6b97e49"></a>
 
 ## Custom scan configurations <sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup> <sup>, </sup><sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup>
 
 While default configurations are good for most of the cases, we might want to look for a more specific target and/or vulnerabilities and reduce the time required for a scan: this can be done by creating a custom scan configuration that works with a specific set of NVTs.
 
 
-<a id="orgd9cd809"></a>
+<a id="orga59cf25"></a>
 
 ### Exercise
 
@@ -263,7 +265,7 @@ We want to create a scan configuration that focuses on databases vulnerabilities
 The new scan configuration is ready to be used for a new scan. Setup more custom configurations and run them on the target VM to discover more vulnerabilities (hint: web servers an and SMTP servers might be a good start).
 
 
-<a id="org409fd16"></a>
+<a id="org062749c"></a>
 
 ## Scan results
 
@@ -292,7 +294,7 @@ From here, the register `Results` contains a list of all vulnerabilities detecte
 -   **Created:** Date and time of the report creation.
 
 
-<a id="org6159eef"></a>
+<a id="org0bd6b11"></a>
 
 ### CVSS <sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup>
 
@@ -303,7 +305,7 @@ The Common Vulnerability Scoring System (CVSS) is a published standard used by o
 -   Developed by the CVSS Special Interest Group (CVSS-SIG) of the Forum of Incident Response and Security Teams (FIRST)
 
 
-<a id="org764d155"></a>
+<a id="org9fe813f"></a>
 
 ### Report export
 
@@ -318,7 +320,7 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 ![img](./img/vulnerability_pdf.jpg)
 
 
-<a id="orga787f4e"></a>
+<a id="org791867e"></a>
 
 # References
 
