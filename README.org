@@ -1,5 +1,4 @@
-#+TITLE: OpenVAS Lab - Network Security
-#+AUTHOR:
+#+TITLE: Vulnerability assessment - OpenVAS (Network Security Lab)
 
 Notes for the OpenVAS lab for the Network Security class.
 
@@ -94,7 +93,40 @@ We repeat the same process to create another task, this time with the following 
 
 The two scans will take few minutes to complete.
 
-** TODO Vulnerability assessment
+** TODO Vulnerability assessment [fn:9]
+
+- No business wants to expose itself to *unnecessary risks* (or be the headline story for the latest cyber attack)
+- From [[https://www.servicenow.com/lpayr/ponemon-vulnerability-survey.html][Ponemon Institute survey]], in 2019
+  - 60% of breaches involved *unpatched vulnerabilities*
+  - 62% of the organizations were *unaware* they were vulnerable prior to the data breach
+  - 52% of the organizations say they are at a disadvantage in responding to vulnerabilities because they use *manual processes*
+- One way to mitigate risks is by performing *routine* network vulnerability assessments
+
+*** Why?
+
+- System hardening :: Identify possible vectors of attack and close them down (e.g. close down unnecessary ports/services)
+- Compliance :: Becoming compliant to regulations (HIPAA, PCI DSS, GDPR, ISO 27001, SOX, FISMA, GLBA, and many others) is impossible without an assessment
+- Maintain strong security :: Routine vulnerability assessments allow identification and mitigation of attacks
+
+*** What?
+
+- Network vulnerability assessment :: Process of _identifying_ security vulnerabilities in systems, _quantifying_ and _analyzing_ them, and _remediating_ those vulnerabilities based on predefined risks
+- Assessments ::  Essential part of a holistic security program, cited by many industry standards and compliance regulations
+- Security experts :: Can
+  - Conduct *vulnerability analysis* of the network scans to _prioritize_ threats identified
+  - Create an *action plan* with steps to _remediate_ vulnerabilities (e.g. maintain up to date patches)
+
+*** When?
+
+- Frequency :: Depends on compliance, changes in infrastructure and business needs
+- Costs :: Between $2,000 $4,000 per report, costs vary depending on
+  - Network complexity
+  - Goals of the assessment
+
+*** How?
+
+[[./img/va_steps.jpg]]
+
 ** What is OpenVAS?
 
 [[./img/openvas-gvm.jpg]]
@@ -189,6 +221,10 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 - [[http://webpages.eng.wayne.edu/~fy8421/16sp-csc5991/labs/lab3-instruction.pdf][Lab example with OpenVAS]]
 
 * Footnotes
+
+[fn:9] [[https://purplesec.us/perform-successful-network-vulnerability-assessment/#WhatIs][How To Perform A Successful Network Security Vulnerability Assessment [from purplesec.us]​]]
+
+[fn:8] [[https://purplesec.us/recent-cyber-security-attacks/#Breach][Recent Cyber Attacks & Data Breaches In 2021 [from purplesec.us]​]]
 
 [fn:7] https://docs.greenbone.net/GSM-Manual/gos-5/en/managing-secinfo.html#cvss
 
