@@ -1,34 +1,36 @@
 
 # Table of Contents
 
-1.  [Requirements](#orgea116ed)
-2.  [Virtual machines setup](#org926a9bc)
-    1.  [OpenVAS VM setup ](#orgd7f680c)
-    2.  [Metasploitable2 VM setup ](#org286b010)
-    3.  [Exporting to `.ova`](#org3a8c3f4)
-3.  [Network setup](#orgf5b06d2)
-4.  [Laboratory](#orgdd471ec)
-    1.  [Network topology](#orgfbe2349)
-    2.  [First steps](#orgb418b2e)
-    3.  [Vulnerability assessment ](#orgcd69e40)
-        1.  [What?](#org4f83c49)
-        2.  [Why?](#org966d4fb)
-        3.  [When?](#org5c33091)
-        4.  [How?](#org09f8f4c)
-    4.  [What is OpenVAS?](#org1a4054a)
-        1.  [Network vulnerability feed](#org9c4cf7b)
-    5.  [Default scan configurations](#org88d7817)
-    6.  [Custom scan configurations ](#org07d3fdd)
-        1.  [Exercise](#org05e5ab9)
-    7.  [Scan results](#org06c63ea)
-        1.  [CVSS ](#org1a58a8e)
-        2.  [Report export](#org1c0ba0f)
-5.  [References](#orgafd6fad)
+1.  [Requirements](#org6aad05f)
+2.  [Virtual machines setup](#org4d80191)
+    1.  [OpenVAS VM setup ](#org21a4581)
+    2.  [Metasploitable2 VM setup ](#org4b3c2d2)
+    3.  [Exporting to `.ova`](#orgb09cbb1)
+3.  [Network setup](#org547f000)
+4.  [Laboratory](#org20fba96)
+    1.  [Network topology](#org5a00d48)
+    2.  [First steps](#org54d8ae8)
+    3.  [Vulnerability assessment ](#org11856e1)
+        1.  [Context](#org71cd346)
+        2.  [What?](#org09661cc)
+        3.  [Vulnerability scanning vs Penetration testing](#org513199f)
+        4.  [Why?](#org61e3a5f)
+        5.  [When?](#orga51f9ef)
+        6.  [How?](#org087114e)
+    4.  [What is OpenVAS?](#orgda0b854)
+        1.  [Network vulnerability feed](#orge537049)
+    5.  [Default scan configurations](#orgde95294)
+    6.  [Custom scan configurations ](#orgb1908bb)
+        1.  [Exercise](#org36dd838)
+    7.  [Scan results](#org62fac9e)
+        1.  [CVSS ](#org4f3926b)
+        2.  [Report export](#org19b65c2)
+5.  [References](#orged5e061)
 
 Notes for the OpenVAS lab for the Network Security class.
 
 
-<a id="orgea116ed"></a>
+<a id="org6aad05f"></a>
 
 # Requirements
 
@@ -39,16 +41,16 @@ We are going to use
 -   Metasploitable 2 (download [here](https://information.rapid7.com/download-metasploitable-2017.html))
 
 
-<a id="org926a9bc"></a>
+<a id="org4d80191"></a>
 
 # Virtual machines setup
 
 
-<a id="orgd7f680c"></a>
+<a id="org21a4581"></a>
 
 ## OpenVAS VM setup <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 
-1.  Open VirtualBox and import the GSM TRIAL image, be sure to [connect it to the network adapter](#orgf5b06d2).
+1.  Open VirtualBox and import the GSM TRIAL image, be sure to [connect it to the network adapter](#org547f000).
 2.  Start the virtual machine: the Greenbone OS is loaded. Access the Greenbone Administration panel with `admin:admin`.
 3.  The first log in starts the `First Setup Wizard`, select `Yes` to continue.
 4.  We are asked to create a web user (required to access the web interface), select `Yes` and input account name `admin` and password `admin`. Select `OK`, a message informs the user that the web administrator has been created, and again select `OK` to close the message.
@@ -58,18 +60,18 @@ We are going to use
 8.  From the host machine, open a browser and connect to the IP address of the machine (e.g. <https://192.168.56.102>). After accepting the self-signed certificate, access the web interface and login with the previously set credentials.
 
 
-<a id="org286b010"></a>
+<a id="org4b3c2d2"></a>
 
 ## Metasploitable2 VM setup <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> <sup>, </sup><sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>
 
 Metasploitable 2 is an intentionally vulnerable Ubuntu Linux virtual machine that is designed for testing common vulnerabilities. The metasploitable ISO is VMWare format.
 
-1.  Unzip the file and create a new VM: choose `Linux->Ubuntu (64bit)`, give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk `*.vmdk`, remember to [connect the VM to the network adapter](#orgf5b06d2). Start the virtual machine.
+1.  Unzip the file and create a new VM: choose `Linux->Ubuntu (64bit)`, give it at least at least 1024MB RAM and do not create a HDD. Wait and add the disk `*.vmdk`, remember to [connect the VM to the network adapter](#org547f000). Start the virtual machine.
 2.  Login using the credentials `msfadmin:msfadmin` and with `ifconfig` retrieve the IP address assigned to the VM
 3.  From the host machine, open a browser and connect to the noted IP address (e.g. <https://192.168.56.101>). After accepting the self-signed certificate, access the web interface: a metasploitable2 web page should be displayed.
 
 
-<a id="org3a8c3f4"></a>
+<a id="orgb09cbb1"></a>
 
 ## Exporting to `.ova`
 
@@ -80,7 +82,7 @@ We can now create an `.ova` file containing two VMs: one for GSM, the other for 
 3.  Set the names of the two VMs (e.g. `Metasploitable2` and `OpenVAS`) and click on `Export`.
 
 
-<a id="orgf5b06d2"></a>
+<a id="org547f000"></a>
 
 # Network setup
 
@@ -96,19 +98,19 @@ Before using the VMs be sure to have them connected through a host-only network:
 To connect a VM select it and go to `Settings > Network`. On the tab `Adapter 1` set `Attached to: Host-only Adapter` and set the right adapter (e.g. `voboxnet0`). Start the virtual machine.
 
 
-<a id="orgdd471ec"></a>
+<a id="org20fba96"></a>
 
 # Laboratory
 
 
-<a id="orgfbe2349"></a>
+<a id="org5a00d48"></a>
 
 ## Network topology
 
 ![img](./img/topology.jpg)
 
 
-<a id="orgb418b2e"></a>
+<a id="org54d8ae8"></a>
 
 ## First steps
 
@@ -119,7 +121,7 @@ We have the following environment setup
     -   **Greenbone Web panel:** `admin:admin`
 -   Metasploitable2 virtual machine
     -   **Metasploitable2 panel:** `msfadmin:msfadmin`
--   The two VMs are connected to a host-only network (see more in the section [Network setup](#orgf5b06d2))
+-   The two VMs are connected to a host-only network (see more in the section [Network setup](#org547f000))
 
 First of all, we need to check what is the actual IP address assigned by the DHCP server, in our case
 
@@ -153,9 +155,14 @@ We repeat the same process to create another task, this time with the following 
 The two scans will take few minutes to complete.
 
 
-<a id="orgcd69e40"></a>
+<a id="org11856e1"></a>
 
 ## Vulnerability assessment <sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>
+
+
+<a id="org71cd346"></a>
+
+### Context
 
 -   No business wants to expose itself to **unnecessary risks** (or be the headline story for the latest cyber attack)
 -   From [Ponemon Institute survey](https://www.servicenow.com/lpayr/ponemon-vulnerability-survey.html), in 2019
@@ -165,7 +172,7 @@ The two scans will take few minutes to complete.
 -   One way to mitigate risks is by performing **routine** network vulnerability assessments
 
 
-<a id="org4f83c49"></a>
+<a id="org09661cc"></a>
 
 ### What?
 
@@ -176,7 +183,19 @@ The two scans will take few minutes to complete.
     -   Create an **action plan** with steps to <span class="underline">remediate</span> vulnerabilities (e.g. maintain up to date patches)
 
 
-<a id="org966d4fb"></a>
+<a id="org513199f"></a>
+
+### Vulnerability scanning vs Penetration testing
+
+-   **Vulnerability scanning:** Identifies
+    -   Known vulnerabilities
+    -   Lack of security controls
+    -   Common misconfigurations within systems
+-   **Penetration testing:** Simulates an attack to exploit weaknesses in order to prove the effectiveness of your network’s security.
+    -   While vulnerability scanning is used for both defensive and offensive cyber security strategies, penetration testing is offensive in nature
+
+
+<a id="org61e3a5f"></a>
 
 ### Why?
 
@@ -185,7 +204,7 @@ The two scans will take few minutes to complete.
 -   **Maintain strong security:** Routine vulnerability assessments allow identification and mitigation of attacks
 
 
-<a id="org5c33091"></a>
+<a id="orga51f9ef"></a>
 
 ### When?
 
@@ -195,7 +214,7 @@ The two scans will take few minutes to complete.
     -   Goals of the assessment
 
 
-<a id="org09f8f4c"></a>
+<a id="org087114e"></a>
 
 ### How?
 
@@ -204,7 +223,7 @@ From [purplesec.us​](https://purplesec.us/perform-successful-network-vulnerabi
 ![img](./img/va_steps.jpg)
 
 
-<a id="org1a4054a"></a>
+<a id="orgda0b854"></a>
 
 ## What is OpenVAS?
 
@@ -220,7 +239,7 @@ The GVM architecture is described by the scheme below
 ![img](./img/gvm_architecture.jpg)
 
 
-<a id="org9c4cf7b"></a>
+<a id="orge537049"></a>
 
 ### Network vulnerability feed
 
@@ -232,7 +251,7 @@ OpenVAS can use two daily updated feeds of Network Vulnerability Tests (NVTs)
 At the time of writing, GCF can count on more than 60.000 NVTs. This list can be accessed through the Greenbone web panel in the menu `SecInfo > NVTs`.
 
 
-<a id="org88d7817"></a>
+<a id="orgde95294"></a>
 
 ## Default scan configurations
 
@@ -245,14 +264,14 @@ Scans allow to execute a series of NVTs for a given target. There are some defau
 -   **Full and fast:** For many environments this is the best option to start with. This scan configuration is based on the information gathered in the previous port scan and uses almost all VTs (excluding VTs that can damage the target system when used). VTs are optimized in the best possible way to keep the potential false negative rate especially low.
 
 
-<a id="org07d3fdd"></a>
+<a id="orgb1908bb"></a>
 
 ## Custom scan configurations <sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup> <sup>, </sup><sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup>
 
 While default configurations are good for most of the cases, we might want to look for a more specific target and/or vulnerabilities and reduce the time required for a scan: this can be done by creating a custom scan configuration that works with a specific set of NVTs.
 
 
-<a id="org05e5ab9"></a>
+<a id="org36dd838"></a>
 
 ### Exercise
 
@@ -265,7 +284,7 @@ We want to create a scan configuration that focuses on databases vulnerabilities
 The new scan configuration is ready to be used for a new scan. Setup more custom configurations and run them on the target VM to discover more vulnerabilities (hint: web servers an and SMTP servers might be a good start).
 
 
-<a id="org06c63ea"></a>
+<a id="org62fac9e"></a>
 
 ## Scan results
 
@@ -294,7 +313,7 @@ From here, the register `Results` contains a list of all vulnerabilities detecte
 -   **Created:** Date and time of the report creation.
 
 
-<a id="org1a58a8e"></a>
+<a id="org4f3926b"></a>
 
 ### CVSS <sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup>
 
@@ -305,7 +324,7 @@ The Common Vulnerability Scoring System (CVSS) is a published standard used by o
 -   Developed by the CVSS Special Interest Group (CVSS-SIG) of the Forum of Incident Response and Security Teams (FIRST)
 
 
-<a id="org1c0ba0f"></a>
+<a id="org19b65c2"></a>
 
 ### Report export
 
@@ -320,7 +339,7 @@ The PDF file includes, a ordered list of vulnerabilities (from highest to lowest
 ![img](./img/vulnerability_pdf.jpg)
 
 
-<a id="orgafd6fad"></a>
+<a id="orged5e061"></a>
 
 # References
 

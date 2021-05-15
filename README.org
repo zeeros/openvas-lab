@@ -95,13 +95,14 @@ The two scans will take few minutes to complete.
 
 ** Vulnerability assessment [fn:9]
 
+*** Context
+
 - No business wants to expose itself to *unnecessary risks* (or be the headline story for the latest cyber attack)
 - From [[https://www.servicenow.com/lpayr/ponemon-vulnerability-survey.html][Ponemon Institute survey]], in 2019
   - 60% of breaches involved *unpatched vulnerabilities*
   - 62% of the organizations were *unaware* they were vulnerable prior to the data breach
   - 52% of the organizations say they are at a disadvantage in responding to vulnerabilities because they use *manual processes*
 - One way to mitigate risks is by performing *routine* network vulnerability assessments
-
 *** What?
 
 - Network vulnerability assessment :: Process of _identifying_ security vulnerabilities in systems, _quantifying_ and _analyzing_ them, and _remediating_ those vulnerabilities based on predefined risks
@@ -109,6 +110,15 @@ The two scans will take few minutes to complete.
 - Security experts :: Can
   - Conduct *vulnerability analysis* of the network scans to _prioritize_ threats identified
   - Create an *action plan* with steps to _remediate_ vulnerabilities (e.g. maintain up to date patches)
+
+*** Vulnerability scanning vs Penetration testing
+
+- Vulnerability scanning :: Identifies
+  - Known vulnerabilities
+  - Lack of security controls
+  - Common misconfigurations within systems
+- Penetration testing :: Simulates an attack to exploit weaknesses in order to prove the effectiveness of your network’s security.
+  - While vulnerability scanning is used for both defensive and offensive cyber security strategies, penetration testing is offensive in nature
 
 *** Why?
 
